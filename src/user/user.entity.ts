@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { hash } from 'bcryptjs';
-import { ChildrenEntity } from './children.entity';
+import { ChildrenEntity } from '../children/children.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
