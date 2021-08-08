@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ChildrenEntity } from './children.entity';
 import { Repository } from 'typeorm';
@@ -19,7 +19,14 @@ export class ChildrenService {
   ): Promise<ChildrenEntity> {
     const newChildren = new ChildrenEntity();
     Object.assign(newChildren, createChildrenDto);
-    newChildren.parent = await this.userService.findById(userId);
+    const user = await this.userService.findById(userId);
+    if (!user) {
+      throw new HttpException(
+        'Родителя с таким id не существует',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+    newChildren.parent = user;
     return await this.childrenRepository.save(newChildren);
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Query, UseGuards } from '@nestjs/common';
 import { ChildrenService } from './children.service';
 import { AuthGuard } from '../user/guards/auth.guard';
 import { CreateChildrenDto } from './dto/createChildren.dto';
@@ -11,7 +11,7 @@ export class ChildrenController {
   @Post()
   @UseGuards(AuthGuard)
   async createChildren(
-    @Param('id') userId: number,
+    @Query('id') userId: number,
     @Body() createChildrenDto: CreateChildrenDto,
   ): Promise<ChildrenEntity> {
     return this.childrenService.createChildren(userId, createChildrenDto);

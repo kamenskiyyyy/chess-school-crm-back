@@ -8,12 +8,14 @@ import { LoginUserDto } from './dto/loginUser.dto';
 import { compare } from 'bcryptjs';
 import { UserResponseInterface } from './types/userResponse.interface';
 import { UpdateUserDto } from './dto/updateUser.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
+    private readonly configService: ConfigService,
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
@@ -107,7 +109,7 @@ export class UserService {
         username: user.username,
         email: user.email,
       },
-      '1a2b-3c4d-5e6f-7g8h',
+      this.configService.get('JWT_SECRET'),
     );
   }
 

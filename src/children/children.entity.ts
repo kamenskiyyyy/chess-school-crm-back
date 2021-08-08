@@ -6,25 +6,25 @@ export class ChildrenEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ default: null })
   firstName: string;
 
-  @Column()
+  @Column({ default: null })
   secondName: string;
 
-  @Column()
+  @Column({ default: null })
   patronymic: string;
 
   @Column()
   birthDate: Date;
 
-  @Column()
+  @Column({ default: false })
   status: boolean;
 
-  @Column()
+  @Column({ default: null })
   adress: string;
 
-  @Column()
+  @Column({ default: null })
   commentaries: string;
 
   @ManyToOne(() => UserEntity, (user) => user.children, { eager: true })
