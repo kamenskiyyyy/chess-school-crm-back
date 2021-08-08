@@ -1,10 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { sign } from 'jsonwebtoken';
 import { CreateUserDto } from './dto/createUser.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
 import { LoginUserDto } from './dto/loginUser.dto';
-import { compare, sign } from 'bcryptjs';
+import { compare } from 'bcryptjs';
 import { UserResponseInterface } from './types/userResponse.interface';
 import { UpdateUserDto } from './dto/updateUser.dto';
 
@@ -38,7 +39,9 @@ export class UserService {
 
     const newUser = new UserEntity();
     Object.assign(newUser, createUserDto);
-    return await this.userRepository.save(newUser);
+    await this.userRepository.save(newUser);
+    delete newUser.password;
+    return newUser;
   }
 
   async findById(id: number): Promise<UserEntity> {
