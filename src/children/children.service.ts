@@ -46,6 +46,12 @@ export class ChildrenService {
     createChildrenDto: CreateChildrenDto,
   ): Promise<ChildrenEntity> {
     const children = await this.childrenRepository.findOne(childrenId);
+    if (!children) {
+      throw new HttpException(
+        'Ребенка с таким id не существует',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
     Object.assign(children, createChildrenDto);
     return await this.childrenRepository.save(children);
   }
@@ -71,12 +77,12 @@ export class ChildrenService {
     return await this.childrenRepository.delete(childrenId);
   }
 
-  async addScores(childrenId: number, scores: number): Promise<ChildrenEntity> {
+  async addCoins(childrenId: number, coins: number): Promise<ChildrenEntity> {
     const children = await this.childrenRepository.findOne(childrenId);
     if (!children) {
       throw new HttpException('Ребенок не найден', HttpStatus.NOT_FOUND);
     }
-    children.scores = scores;
+    children.coins = coins;
     return await this.childrenRepository.save(children);
   }
 }

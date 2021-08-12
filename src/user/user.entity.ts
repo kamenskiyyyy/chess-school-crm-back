@@ -45,6 +45,8 @@ export class UserEntity {
     this.password = await hash(this.password, 10);
   }
 
-  @OneToMany(() => ChildrenEntity, (children) => children.parent)
+  @OneToMany(() => ChildrenEntity, (children) => children.parent, {
+    cascade: true,
+  })
   children: ChildrenEntity[];
 }

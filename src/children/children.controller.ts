@@ -55,10 +55,10 @@ export class ChildrenController {
 
   @Put()
   @UseGuards(AuthGuard)
-  async addScores(
+  async addCoins(
     @Query('childrenId') childrenId: number,
-    @Query('scores') scores: number,
+    @Query('coins') coins: number,
   ): Promise<ChildrenEntity> {
-    return this.childrenService.addScores(childrenId, scores);
+    return this.childrenService.addCoins(childrenId, coins);
   }
 }

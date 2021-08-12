@@ -1,5 +1,12 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { UserEntity } from '../user/user.entity';
+import { PassEntity } from '../pass/pass.entity';
 
 @Entity({ name: 'children' })
 export class ChildrenEntity {
@@ -25,11 +32,14 @@ export class ChildrenEntity {
   adress: string;
 
   @Column({ default: null })
-  commentaries: string;
+  comment: string;
 
   @Column({ default: 0 })
-  scores: number;
+  coins: number;
 
   @ManyToOne(() => UserEntity, (user) => user.children, { eager: true })
   parent: UserEntity;
+
+  @OneToOne(() => PassEntity, (pass) => pass)
+  pass: PassEntity;
 }
