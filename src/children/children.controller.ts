@@ -13,6 +13,7 @@ import { AuthGuard } from '../user/guards/auth.guard';
 import { CreateChildrenDto } from './dto/createChildren.dto';
 import { ChildrenEntity } from './children.entity';
 import { DeleteResult } from 'typeorm';
+import { RoleAdminGuard } from '../user/guards/roleAdmin.guard';
 
 @Controller('children')
 export class ChildrenController {
@@ -20,6 +21,7 @@ export class ChildrenController {
 
   @Get()
   @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async getAllChildren(
     @Query('userId') userId: number,
   ): Promise<ChildrenEntity[]> {
@@ -28,6 +30,7 @@ export class ChildrenController {
 
   @Post()
   @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async createChildren(
     @Query('userId') userId: number,
     @Body() createChildrenDto: CreateChildrenDto,
@@ -37,6 +40,7 @@ export class ChildrenController {
 
   @Put()
   @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async updateChildren(
     @Query('childrenId') childrenId: number,
     @Body() createChildrenDto: CreateChildrenDto,
@@ -46,6 +50,7 @@ export class ChildrenController {
 
   @Delete()
   @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async deleteChildren(
     @Query('userId') userId: number,
     @Query('childrenId') childrenId: number,
@@ -55,6 +60,7 @@ export class ChildrenController {
 
   @Put()
   @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async addCoins(
     @Query('childrenId') childrenId: number,
     @Query('coins') coins: number,

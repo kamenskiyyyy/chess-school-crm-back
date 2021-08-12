@@ -12,6 +12,7 @@ import { AuthGuard } from '../user/guards/auth.guard';
 import { CreatePassDto } from './dto/createPass.dto';
 import { PassEntity } from './pass.entity';
 import { DeleteResult } from 'typeorm';
+import { RoleAdminGuard } from '../user/guards/roleAdmin.guard';
 
 @Controller('pass')
 export class PassController {
@@ -19,6 +20,7 @@ export class PassController {
 
   @Post()
   @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async createPass(
     @Query('childrenId') childrenId: number,
     @Body() createPassDto: CreatePassDto,
@@ -28,6 +30,7 @@ export class PassController {
 
   @Put()
   @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async updatePass(
     @Query('passId') passId: number,
     @Body() createPassDto: CreatePassDto,
@@ -37,6 +40,7 @@ export class PassController {
 
   @Delete()
   @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async deletePass(@Query('passId') passId: number): Promise<DeleteResult> {
     return this.passService.deletePass(passId);
   }

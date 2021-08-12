@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -38,8 +39,9 @@ export class ChildrenEntity {
   coins: number;
 
   @ManyToOne(() => UserEntity, (user) => user.children, { eager: true })
+  @JoinColumn()
   parent: UserEntity;
 
-  @OneToOne(() => PassEntity, (pass) => pass)
+  @OneToOne(() => PassEntity, (pass) => pass.children)
   pass: PassEntity;
 }

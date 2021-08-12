@@ -7,12 +7,15 @@ import { AuthGuard } from './guards/auth.guard';
 import { UserEntity } from './user.entity';
 import { User } from './decorators/user.decorator';
 import { UpdateUserDto } from './dto/updateUser.dto';
+import { RoleAdminGuard } from './guards/roleAdmin.guard';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('signup')
+  @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async createUser(
     @Body() createUserDto: CreateUserDto,
   ): Promise<UserResponseInterface> {
@@ -21,6 +24,8 @@ export class UserController {
   }
 
   @Post('signin')
+  @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async login(@Body() loginDto: LoginUserDto): Promise<UserResponseInterface> {
     const user = await this.userService.login(loginDto);
     return this.userService.buildUserResponse(user);
@@ -28,12 +33,14 @@ export class UserController {
 
   @Get('user')
   @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async currentUser(@User() user: UserEntity): Promise<UserResponseInterface> {
     return this.userService.buildUserResponse(user);
   }
 
   @Put('user')
   @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
   async updateCurrentUser(
     @User('id') currentUserId: number,
     @Body() updateUserDto: UpdateUserDto,
