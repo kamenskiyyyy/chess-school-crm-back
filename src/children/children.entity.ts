@@ -18,14 +18,17 @@ export class ChildrenEntity {
   @Column()
   birthDate: Date;
 
-  @Column({ default: false })
-  status: boolean;
+  @Column({ default: 'active' })
+  status: string;
 
   @Column({ default: null })
   adress: string;
 
   @Column({ default: null })
   commentaries: string;
+
+  @Column({ default: 0 })
+  scores: number;
 
   @ManyToOne(() => UserEntity, (user) => user.children, { eager: true })
   parent: UserEntity;

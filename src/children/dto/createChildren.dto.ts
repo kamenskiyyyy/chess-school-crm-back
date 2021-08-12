@@ -1,4 +1,4 @@
-import { IsBoolean, IsDate, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsOptional, IsString } from 'class-validator';
 
 export class CreateChildrenDto {
   @IsOptional()
@@ -18,8 +18,8 @@ export class CreateChildrenDto {
   birthDate: Date;
 
   @IsOptional()
-  @IsBoolean()
-  status: boolean;
+  @IsString()
+  status: string;
 
   @IsOptional()
   @IsString()
