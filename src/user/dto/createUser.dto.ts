@@ -1,5 +1,5 @@
 import {
-  IsDate,
+  IsDateString,
   IsEmail,
   IsNotEmpty,
   IsNumber,
@@ -16,7 +16,7 @@ export class CreateUserDto {
   @IsString()
   password: string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   type: string;
 
@@ -33,7 +33,7 @@ export class CreateUserDto {
   patronymic: string;
 
   @IsNotEmpty()
-  @IsDate()
+  @IsDateString()
   birthDate: Date;
 
   @IsOptional()

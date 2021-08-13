@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { hash } from 'bcryptjs';
 import { ChildrenEntity } from '../children/children.entity';
+import { LessonEntity } from '../lesson/lesson.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -45,8 +46,9 @@ export class UserEntity {
     this.password = await hash(this.password, 10);
   }
 
-  @OneToMany(() => ChildrenEntity, (children) => children.parent, {
-    cascade: true,
-  })
+  @OneToMany(() => ChildrenEntity, (children) => children.parent)
   children: ChildrenEntity[];
+
+  @OneToMany(() => LessonEntity, (lesson) => lesson.coach)
+  lessons: LessonEntity[];
 }

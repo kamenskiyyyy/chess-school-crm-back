@@ -7,9 +7,16 @@ import { ChildrenModule } from './children/children.module';
 import { AuthMiddleware } from './user/middlewares/auth.middleware';
 import { ConfigService } from '@nestjs/config';
 import { PassModule } from './pass/pass.module';
+import { LessonModule } from './lesson/lesson.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), UserModule, ChildrenModule, PassModule],
+  imports: [
+    TypeOrmModule.forRoot(),
+    UserModule,
+    ChildrenModule,
+    PassModule,
+    LessonModule,
+  ],
   controllers: [AppController],
   providers: [AppService, ConfigService],
 })
