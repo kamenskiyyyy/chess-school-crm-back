@@ -8,6 +8,7 @@ import { AuthMiddleware } from './user/middlewares/auth.middleware';
 import { ConfigService } from '@nestjs/config';
 import { PassModule } from './pass/pass.module';
 import { LessonModule } from './lesson/lesson.module';
+import { LessonChildrenModule } from './lessonChildren/lessonChildren.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { LessonModule } from './lesson/lesson.module';
     ChildrenModule,
     PassModule,
     LessonModule,
+    LessonChildrenModule,
   ],
   controllers: [AppController],
   providers: [AppService, ConfigService],

@@ -47,8 +47,8 @@ export class UserEntity {
   }
 
   @OneToMany(() => ChildrenEntity, (children) => children.parent)
-  children: ChildrenEntity[];
+  children: ChildrenEntity;
 
   @OneToMany(() => LessonEntity, (lesson) => lesson.coach)
-  lessons: LessonEntity[];
+  lessons: LessonEntity;
 }
