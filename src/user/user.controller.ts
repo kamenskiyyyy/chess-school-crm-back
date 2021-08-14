@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Put,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserService } from './user.service';
 import { UserResponseInterface } from './types/userResponse.interface';
@@ -8,12 +16,20 @@ import { UserEntity } from './user.entity';
 import { User } from './decorators/user.decorator';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { RoleAdminGuard } from './guards/roleAdmin.guard';
+import { Response } from 'express';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('signup')
+  @Get()
+  @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
+  async getAllUsers(): Promise<UserEntity[]> {
+    return this.userService.getAllUsers();
+  }
+
+  @Post('create')
   @UseGuards(AuthGuard)
   @UseGuards(RoleAdminGuard)
   async createUser(
@@ -24,11 +40,17 @@ export class UserController {
   }
 
   @Post('signin')
-  @UseGuards(AuthGuard)
-  @UseGuards(RoleAdminGuard)
-  async login(@Body() loginDto: LoginUserDto): Promise<UserResponseInterface> {
+  async login(
+    @Body() loginDto: LoginUserDto,
+    @Res({ passthrough: true }) response: Response,
+  ): Promise<UserResponseInterface> {
     const user = await this.userService.login(loginDto);
-    return this.userService.buildUserResponse(user);
+    const login = await this.userService.buildUserResponse(user);
+    response.cookie('Authorization', `Bearer ${login.data.token}`, {
+      httpOnly: true,
+      maxAge: 36000000,
+    });
+    return login;
   }
 
   @Get('user')
