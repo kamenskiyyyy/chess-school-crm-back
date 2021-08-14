@@ -18,6 +18,10 @@ export class UserService {
     private readonly configService: ConfigService,
   ) {}
 
+  async getAllUsers(): Promise<UserEntity[]> {
+    return await this.userRepository.find({ where: { type: 'user' } });
+  }
+
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     // Проверки на уникальность
     const userByEmail = await this.userRepository.findOne({
@@ -115,7 +119,7 @@ export class UserService {
 
   buildUserResponse(user: UserEntity): UserResponseInterface {
     return {
-      user: {
+      data: {
         ...user,
         token: this.generateJwt(user),
       },
