@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Post,
   Put,
   Query,
@@ -17,6 +18,12 @@ import { RoleAdminGuard } from '../user/guards/roleAdmin.guard';
 @Controller('pass')
 export class PassController {
   constructor(private readonly passService: PassService) {}
+
+  @Get()
+  @UseGuards(AuthGuard)
+  async getAllPass(): Promise<PassEntity[]> {
+    return this.passService.getAllPass();
+  }
 
   @Post()
   @UseGuards(AuthGuard)

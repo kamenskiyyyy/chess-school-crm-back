@@ -14,6 +14,10 @@ export class PassService {
     private readonly childrenRepository: Repository<ChildrenEntity>,
   ) {}
 
+  async getAllPass(): Promise<PassEntity[]> {
+    return await this.passRepository.find();
+  }
+
   async createPass(
     childrenId: number,
     createPassDto: CreatePassDto,
