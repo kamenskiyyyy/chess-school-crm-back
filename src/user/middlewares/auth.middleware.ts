@@ -13,13 +13,13 @@ export class AuthMiddleware implements NestMiddleware {
   ) {}
 
   async use(req: ExpressRequest, res: Response, next: NextFunction) {
-    if (!req.cookies.Authorization) {
+    if (!req.headers.authorization) {
       req.user = null;
       next();
       return;
     }
 
-    const token = req.cookies.Authorization.split(' ')[1];
+    const token = req.headers.authorization.split(' ')[1];
     try {
       const decode: any = verify(token, this.configService.get('JWT_SECRET'));
       req.user = await this.userService.findById(decode.id);

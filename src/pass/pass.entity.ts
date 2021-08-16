@@ -29,7 +29,7 @@ export class PassEntity {
   startDate: Date;
 
   @Column({ default: null })
-  endData: Date;
+  endDate: Date;
 
   @Column({ default: true })
   office: boolean;
