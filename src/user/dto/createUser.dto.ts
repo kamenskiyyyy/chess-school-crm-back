@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -38,6 +39,7 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   phone: number;
 
   @IsNotEmpty()

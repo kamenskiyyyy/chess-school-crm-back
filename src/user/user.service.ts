@@ -24,21 +24,21 @@ export class UserService {
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     // Проверки на уникальность
-    const userByEmail = await this.userRepository.findOne({
-      email: createUserDto.email,
-    });
     const userByUsername = await this.userRepository.findOne({
       username: createUserDto.username,
     });
-    if (userByEmail) {
+    const userByEmail = await this.userRepository.findOne({
+      email: createUserDto.email,
+    });
+    if (userByUsername) {
       throw new HttpException(
-        'Пользователь с таким email уже есть',
+        'Пользователь с таким логином уже есть',
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     }
-    if (userByUsername) {
+    if (userByEmail) {
       throw new HttpException(
-        'Пользователь с таким username уже есть',
+        'Пользователь с таким email уже есть',
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     }
