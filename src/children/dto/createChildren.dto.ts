@@ -1,11 +1,9 @@
 import { IsDateString, IsOptional, IsString } from 'class-validator';
 
 export class CreateChildrenDto {
-  @IsOptional()
   @IsString()
   firstName: string;
 
-  @IsOptional()
   @IsString()
   secondName: string;
 
@@ -17,7 +15,6 @@ export class CreateChildrenDto {
   @IsDateString()
   birthDate: Date;
 
-  @IsOptional()
   @IsString()
   status: string;
 
@@ -27,5 +24,5 @@ export class CreateChildrenDto {
 
   @IsOptional()
   @IsString()
-  commentaries: string;
+  comment: string;
 }

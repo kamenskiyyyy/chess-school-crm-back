@@ -29,7 +29,7 @@ export class UserEntity {
   @Column({ default: '' })
   secondName: string;
 
-  @Column({ default: '' })
+  @Column({ default: null })
   patronymic: string;
 
   @Column()

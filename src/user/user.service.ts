@@ -22,6 +22,10 @@ export class UserService {
     return await this.userRepository.find();
   }
 
+  async getAllUsersTypeUser(): Promise<UserEntity[]> {
+    return await this.userRepository.find({ where: { type: 'user' } });
+  }
+
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     // Проверки на уникальность
     const userByUsername = await this.userRepository.findOne({

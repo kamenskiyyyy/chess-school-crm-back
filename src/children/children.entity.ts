@@ -22,7 +22,7 @@ export class ChildrenEntity {
   @Column('text', { default: '' })
   secondName: string;
 
-  @Column('text', { default: '' })
+  @Column('text', { default: null })
   patronymic: string;
 
   @Column()
@@ -34,7 +34,7 @@ export class ChildrenEntity {
   @Column('text', { default: '' })
   adress: string;
 
-  @Column('text', { default: '' })
+  @Column({ default: null })
   comment: string;
 
   @Column({ default: 0 })

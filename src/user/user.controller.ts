@@ -29,9 +29,14 @@ export class UserController {
     return this.userService.getAllUsers();
   }
 
-  @Post('create')
+  @Get('user')
   @UseGuards(AuthGuard)
   @UseGuards(RoleAdminGuard)
+  async getAllUsersTypeUser(): Promise<UserEntity[]> {
+    return this.userService.getAllUsersTypeUser();
+  }
+
+  @Post('create')
   async createUser(
     @Body() createUserDto: CreateUserDto,
   ): Promise<UserResponseInterface> {
