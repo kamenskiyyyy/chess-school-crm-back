@@ -19,7 +19,7 @@ export class UserService {
   ) {}
 
   async getAllUsers(): Promise<UserEntity[]> {
-    return await this.userRepository.find({ where: { type: 'user' } });
+    return await this.userRepository.find();
   }
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {

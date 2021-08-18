@@ -23,19 +23,19 @@ export class UserEntity {
   @Column({ default: 'user' })
   type: string;
 
-  @Column({ default: null })
+  @Column({ default: '' })
   firstName: string;
 
-  @Column({ default: null })
+  @Column({ default: '' })
   secondName: string;
 
-  @Column({ default: null })
+  @Column({ default: '' })
   patronymic: string;
 
   @Column()
   birthDate: Date;
 
-  @Column({ default: null })
+  @Column('bigint', { default: null })
   phone: number;
 
   @Column()
