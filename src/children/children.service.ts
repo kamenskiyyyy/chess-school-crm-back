@@ -13,7 +13,11 @@ export class ChildrenService {
     private readonly userService: UserService,
   ) {}
 
-  async getAllChildren(userId: number): Promise<ChildrenEntity[]> {
+  async getAllChildren(): Promise<ChildrenEntity[]> {
+    return await this.childrenRepository.find();
+  }
+
+  async getChildrenByUsersId(userId: number): Promise<ChildrenEntity[]> {
     const user = await this.userService.findById(userId);
     if (!user) {
       throw new HttpException(

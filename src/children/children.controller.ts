@@ -22,10 +22,17 @@ export class ChildrenController {
   @Get()
   @UseGuards(AuthGuard)
   @UseGuards(RoleAdminGuard)
-  async getAllChildren(
+  async getAllChildren(): Promise<ChildrenEntity[]> {
+    return this.childrenService.getAllChildren();
+  }
+
+  @Get('user')
+  @UseGuards(AuthGuard)
+  @UseGuards(RoleAdminGuard)
+  async getChildrenByUsersId(
     @Query('userId') userId: number,
   ): Promise<ChildrenEntity[]> {
-    return this.childrenService.getAllChildren(userId);
+    return this.childrenService.getChildrenByUsersId(userId);
   }
 
   @Post()

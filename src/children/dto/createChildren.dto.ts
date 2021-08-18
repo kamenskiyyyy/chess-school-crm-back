@@ -1,4 +1,4 @@
-import { IsDate, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsOptional, IsString } from 'class-validator';
 
 export class CreateChildrenDto {
   @IsOptional()
@@ -14,7 +14,7 @@ export class CreateChildrenDto {
   patronymic: string;
 
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   birthDate: Date;
 
   @IsOptional()

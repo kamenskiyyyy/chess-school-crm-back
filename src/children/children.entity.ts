@@ -16,13 +16,13 @@ export class ChildrenEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ default: null })
+  @Column('text', { default: '' })
   firstName: string;
 
-  @Column({ default: null })
+  @Column('text', { default: '' })
   secondName: string;
 
-  @Column({ default: null })
+  @Column('text', { default: '' })
   patronymic: string;
 
   @Column()
@@ -31,10 +31,10 @@ export class ChildrenEntity {
   @Column({ default: 'active' })
   status: string;
 
-  @Column({ default: null })
+  @Column('text', { default: '' })
   adress: string;
 
-  @Column({ default: null })
+  @Column('text', { default: '' })
   comment: string;
 
   @Column({ default: 0 })
