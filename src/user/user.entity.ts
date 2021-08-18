@@ -20,7 +20,7 @@ export class UserEntity {
   @Column({ select: false })
   password: string;
 
-  @Column({ default: 'user' })
+  @Column()
   type: string;
 
   @Column({ default: '' })
