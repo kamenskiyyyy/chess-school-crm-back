@@ -40,7 +40,7 @@ export class UserService {
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     }
-    if (userByEmail) {
+    if (!!createUserDto.email && userByEmail) {
       throw new HttpException(
         'Пользователь с таким email уже есть',
         HttpStatus.UNPROCESSABLE_ENTITY,

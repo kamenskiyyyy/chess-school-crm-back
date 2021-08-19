@@ -21,11 +21,9 @@ export class CreateUserDto {
   @IsString()
   type: string;
 
-  @IsOptional()
   @IsString()
   firstName: string;
 
-  @IsOptional()
   @IsString()
   secondName: string;
 
@@ -42,7 +40,7 @@ export class CreateUserDto {
   @Type(() => Number)
   phone: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsEmail()
   email: string;
 }

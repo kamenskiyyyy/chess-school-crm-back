@@ -23,10 +23,10 @@ export class UserEntity {
   @Column()
   type: string;
 
-  @Column({ default: '' })
+  @Column({ default: null })
   firstName: string;
 
-  @Column({ default: '' })
+  @Column({ default: null })
   secondName: string;
 
   @Column({ default: null })
@@ -38,7 +38,7 @@ export class UserEntity {
   @Column('bigint', { default: null })
   phone: number;
 
-  @Column()
+  @Column({ default: null })
   email: string;
 
   @BeforeInsert()
